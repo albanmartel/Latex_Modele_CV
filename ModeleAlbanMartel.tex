@@ -1,0 +1,287 @@
+% EUPL © Communauté Européenne 2007 %
+%Auteur alban martel 2015 %
+% albanMartel.developpeur at gmail.com
+\documentclass[12pt,a4paper]{article}
+\usepackage{array, xcolor, lipsum, bibentry}
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc} %Ce package s’occupe de la gestion des accents pour les pdf
+\usepackage[frenchb]{babel}
+\usepackage{graphicx} % PACKAGE POUR INSÉRER DES IMAGES
+\usepackage{titlesec} % PACKAGE POUR PERSONNSALISER LES TITRES DE SECTION
+\usepackage{xcolor} %PACKAGE POUR CREER DES COULEURS PERSONNELLES
+\usepackage{stackengine} % Package pour aligner en haut les dates
+\usepackage{tabularx} %PACKAGE POUR ETENDRE LES POSIBILITÉS DES TABLEAUX
+\usepackage{ifthen} %PACKAGE IF then ELSE POUR EVITER DE METTRE DES CHAMPS VIDES
+\usepackage{xifthen}% provides \isempty test
+\usepackage{tikz}
+
+\pagestyle{empty}               % On ne numérote pas les pages
+\setlength\parindent{0pt}	% On ne veut aucun retrait au début d'un paragraphe
+% DONNEES DU DOCUMENT %
+\title{}
+\author{Alban Martel}
+\date{\today}
+
+% PARAMETRES ESPACES DE DIMENSIONS
+\newcommand{\espaceApresEntete}{0.5cm}
+\newcommand{\espacementLigne}{.1cm}
+\newcommand{\largeurEncartTitreCV}{8cm}
+\newcommand{\largeurEncartPhotoCandidat}{4cm}
+\newcommand{\espaceApresTableau}{}
+\newcommand{\largeurTableau}{18.8cm}
+\newcommand{\largeurPhotoCandidat}{2cm}
+\newcommand{\LargeurPhotoVoiture}{1cm}
+\newcommand{\largeurTitreCV}{.45}
+\newcommand{\LargeurAnnees}{1.8cm}
+
+%DONNEES DES ENTETES
+%CIVILITE
+\newcommand{\prenom}{prenom}
+\newcommand{\nom}{nom}
+\newcommand{\adresse}{adresse}
+\newcommand{\codepostal}{codepostal}
+\newcommand{\ville}{ville}
+\newcommand{\pays}{pays}
+\newcommand{\mobile}{numéro de mobile}
+\newcommand{\email}{login@gmail.com}
+%COMMANDE PERMIS MOBILITE %
+\newcommand{\permis}{Permis B et 
+% Image de la voiture
+\begin{tikzpicture}[y=0.80pt,x=0.80pt,yscale=-1, inner sep=0pt, outer sep=0pt]
+\begin{scope}[cm={{1.25,0.0,0.0,-1.25,(-179.99961,89.375)}}]
+  \begin{scope}[cm={{0.125,0.0,0.0,0.125,(143.49969,56.0)}}]
+    \path[fill=black,nonzero rule] (171.1520,124.0000) .. controls
+      (177.4730,124.0000) and (183.5980,121.8440) .. (188.6560,117.9100) --
+      (225.1450,89.8090) -- (315.2930,76.9610) .. controls (321.4340,75.9770) and
+      (325.4020,69.8520) .. (323.5350,63.7660) -- (314.3240,32.9410) --
+      (296.3320,32.9410) .. controls (298.1290,15.4800) and (286.1760,4.0000) ..
+      (270.9220,4.0000) .. controls (255.6680,4.0000) and (243.5660,16.9880) ..
+      (245.5120,32.9410) -- (97.9770,32.9410) .. controls (100.1250,15.5310) and
+      (87.4880,4.0000) .. (72.5660,4.0000) .. controls (57.6480,4.0000) and
+      (45.2150,17.0040) .. (47.1560,32.9410) -- (10.3750,32.9410) .. controls
+      (6.9450,32.9410) and (4.0000,35.8980) .. (4.0000,39.5270) -- (4.0000,74.3870)
+      .. controls (4.0000,77.7070) and (6.3980,80.4650) .. (9.5270,80.8980) --
+      (72.1560,89.8090) -- (96.9570,115.1600) .. controls (102.3790,120.8160) and
+      (109.7890,123.8790) .. (117.6170,124.0000) -- (171.1520,124.0000) --
+      cycle(144.8200,113.3050) -- (116.0390,113.3050) .. controls
+      (111.7660,113.3050) and (107.8520,111.0390) .. (105.4450,107.4140) --
+      (98.3400,96.4690) .. controls (96.5820,93.4060) and (98.4960,90.4260) ..
+      (101.7850,89.8830) -- (144.8200,89.8830) -- (144.8200,113.3050) --
+      cycle(175.7810,113.2540) -- (152.9650,113.2540) -- (152.9650,89.8830) --
+      (211.4730,89.8830) -- (185.2850,109.9880) .. controls (182.5780,112.0780) and
+      (179.1520,113.2540) .. (175.7810,113.2540) -- cycle;
+  \end{scope}
+\end{scope}
+\end{tikzpicture}
+%\includegraphics[width=\LargeurPhotoVoiture]{\photoVoiture}
+}
+    
+%CALCUL AGE
+\newcounter{anneeAnniv}
+\setcounter{anneeAnniv}{0000}
+\newcounter{age}
+\setcounter{age}{\number\year}
+\addtocounter{age}{-\theanneeAnniv}
+
+%TITRE CV%
+\newcommand{\poste}{Titre du Poste Désiré}
+
+%NOM PHOTO% % Commande à compléter pour enlever la photo par défault %
+\newcommand{\photoCandidat}{} % Nom de l'image au format PDF 
+
+%DONNEES COMPETENCES %
+\newcommand{\Competences}{
+  \SectionCV{Compétences}{
+  \begin{tabularx}{\largeurTableau}{X}
+    \MotifCompetences{Groupement de compétences 1}{Description }
+    \MotifCompetences{Groupement de compétences 2}{Description}
+    \MotifCompetences{Groupement de compétences 3}{Description}
+    \MotifCompetences{Groupement de compétences 4}{Description}
+    \MotifCompetences{Groupement de compétences 5}{Description}
+  \end{tabularx}\\
+  }
+}
+
+% DONNEES EXPERIENCE %
+\newcommand{\Experience}{
+  \SectionCV{Expérience}{
+  \begin{tabularx}{\largeurTableau}{p{\LargeurAnnees} X}
+    Année & \textbf{Fonction,} \textit{Entreprise - Ville (Département)}\\
+    \begin{footnotesize}(avril-août)\end{footnotesize} & \hspace{\espacementLigne} --- Titre tâche\\
+    & \hspace{\espacementLigne} \textbf{Description tâche}\\
+    & \hspace{\espacementLigne} --- Titre tâche\\
+    & \hspace{\espacementLigne} \textbf{Description tâche}\\
+    Année & \textbf{Fonction,} \textit{Entreprise - Ville (Département)}\\
+    & \hspace{\espacementLigne} --- Titre tâche\\
+    & \hspace{\espacementLigne} \textbf{Description tâche}\\
+    & \hspace{\espacementLigne} --- Titre tâche\\
+    & \hspace{\espacementLigne} \textbf{Description tâche}\\
+    Année & \textbf{Fonction,} \textit{Entreprise - Ville (Département)}\\
+    Année & \textbf{Fonction,} \textit{Entreprise - Ville (Département)}\\
+    Année & \textbf{Fonction,} \textit{Entreprise - Ville (Département)}\\
+  \end{tabularx}\\
+  }
+}
+
+\newcommand{\Formation}{
+  \SectionCV{Formation}{
+  \begin{tabularx}{\largeurTableau}{p{\LargeurAnnees} X}
+    Annee & \textbf{Licence "en ..."}\\
+      & \textit{Etablissement - Ville (Département)}\\
+    Année -1  & \textbf{L2 "en ..."}\\
+      & \textit{Etablissement - Ville (Département)}\\
+    Année -2  & \textbf{L1 "en ..."}\\
+      & \textit{Etablissement - Ville (Département)}\\
+    Année -3  & \textbf{Baccalauréat "en ..."}\\
+      & \textit{Etablissement - Ville (Département)}\\
+  \end{tabularx}\\
+  }
+}
+
+% CENTRES D'INTERTS ET LOISIRS %
+\newcommand{\PassesTemps}{
+  \SectionCV{Centres d’intérêts et loisirs}{
+  \begin{tabularx}{\largeurTableau}{X}
+    Ensemble de loisirs regroupé par thématique\\
+    Ensemble de loisirs regroupé par thématique\\
+    Ensemble de loisirs regroupé par thématique\\
+  \end{tabularx}
+  }
+}
+
+\definecolor{cd5e5ff}{RGB}{213,229,255}
+\definecolor{cffffff}{RGB}{255,255,255}
+
+\newcommand{\MotifCompetences}[2]{
+  \ifthenelse{\equal{#1}{}} % SI
+  {}%SI VRAI
+  {% SINON   
+    \ifthenelse{\equal{#2}{}} % SI
+    {% SI
+      \textbf{#2}\\
+    }% FIN SI
+    {%SINON
+      #1 : \\
+      \textbf{#2}\\
+    }% FIN SINON
+  }% FIN SINON et SI
+}
+
+
+%COMMANDE POUR LES SECTIONS
+\titleformat{\section}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesection}{1em}{}
+  
+%REGLAGE DES ESPACEMENTS DE Cadre
+%\titlespacing{\section}{espace horizontal}{espace avant}{espace après}
+\titlespacing\section{0pt}{0pt}{0pt}
+
+%COMMANDE POUR CREER DES SECTIONS ENCADREES%
+\newcommand{\Section}[1]
+{%\vspace*{.2cm}
+%\section*{#1}
+\fcolorbox{black}{cd5e5ff}{\parbox{.97\textwidth}{\section*{#1}}}
+}
+
+%COMMANDE GRANDE SECTION DU CV %
+% Fonction : \SectionCV{} %
+% 3 paramètres : %
+%	- Le "TITRE ENCADRE" %
+%	- "PARAMETRES COLONNES" %
+%	- Le "CONTENU DE SECTION" %
+\newcommand{\SectionCV}[1]{
+  \ifthenelse{\equal{#1}{}} % SI ARGUMENT VIDE
+  {} %ALORS rien%
+  { % SINON %
+    \vspace*{\espacementLigne}
+    \newline %SAUT DE LIGNE%
+    \Section{#1} %VARIABLE : TITRE ENCADRE%
+    \noindent %PAS DE RETRAIT%
+    \vspace*{\espacementLigne}  % ESPACEMENTS
+    \newline %SAUT DE LIGNE%
+  }%FIN SI%
+} % FIN Fonction \SectionCV{} %
+
+%COMMANDE QUI FAIT LES PUCES ET LES TEHCNO ET OUTILS UTILISÉS
+\newcommand{\puce}[1]{\begin{itemize}
+                       \item #1
+                      \end{itemize}
+}
+
+%COMMANDE CONSTRUISANT l'ENCART GAUCHE EN HAUT
+\newcommand{\civilite}{
+\begin{tabular}{l}
+\begin{Large}\textbf{\prenom\ \nom}\end{Large}\\
+\adresse\\
+  \codepostal\ \ville\\
+  \mobile\\
+  \email\\
+  \permis\\
+\end{tabular}
+}
+
+%COMMANDE CONSTRUISANT L'ENCART CENTRAL EN HAUT
+ \newcommand{\titreCV}{
+ \begin{minipage}[ht]{\largeurTitreCV\textwidth}
+\vfill
+\begin{Large}
+  \begin{bf}
+    \begin{center}
+      \poste
+    \end{center}
+  \end{bf}
+\end{Large}
+\vfill
+\end{minipage}}
+
+%COMMANDE CONSTRUISANT L'ENCART DROITE EN HAUT
+\newcommand{\imageCandidat}{
+\begin{minipage}[ht]{\largeurTitreCV\textwidth}
+\vfill
+    \begin{center}
+          \ifthenelse{\equal{\photoCandidat}{}} % SI
+	  {%SI VRAI
+	      \begin{tikzpicture}[y=0.80pt,x=0.80pt,yscale=-1, inner sep=0pt, outer sep=0pt]
+		\path[fill=cd5e5ff,even odd rule,rounded corners=0.0000cm] (0.0000,0.0000)
+		rectangle (70.8718,88.7244);
+		\path[cm={{-0.3802,-0.00354,0.0059,-0.22826,(70.62172,111.64536)}},fill=cffffff,even
+		odd rule] (182.7037,176.5586)arc(0.000:177.600:87.867027 and 44.805) --
+		(94.8366,176.5586) -- cycle;
+		\path[cm={{0.23544,0.0,0.0,0.27201,(20.60385,11.49791)}},fill=cffffff,even odd
+		rule] (144.3707,69.0273)arc(0.000:180.000:76.914764 and
+		106.536)arc(-180.000:0.000:76.914764 and 106.536) -- cycle;
+		\path[fill=cffffff,even odd rule,rounded corners=0.0000cm] (2.2540,70.6491)
+		rectangle (69.0126,87.3880);
+	      \end{tikzpicture}
+	  }%FIN SI VRAI
+	  {% SINON   
+	    \includegraphics[width=\largeurPhotoCandidat]{\photoCandidat}\\
+	  }% FIN SINON et SI      
+    \end{center}
+\vfill
+\end{minipage}
+}
+
+
+
+\begin{document}
+% GENERATION DE L'ENTETE %
+\begin{tabularx}{\largeurTableau}{X X X}
+\civilite %Bloc des civilités
+& \titreCV % Bloc du titre du CV
+& \imageCandidat % Image du Candidat
+\end{tabularx}
+\vspace*{\espaceApresEntete}
+\newline
+% COMPETENCES %
+\Competences
+%EXPERIENCE%
+\Experience
+%FORMATION%
+\Formation
+%CENTRES D interets et passes temps
+\PassesTemps
+ 
+ 
+\end{document}
