@@ -12,3 +12,5 @@ Les bibliothèques optionnelles de LaTeX sont nécessaires
 
 
 5 Bugg mineurs connus: problèmes de "Overfull \hbox (....pt too wide)"
+
+<img src="https://raw.githubusercontent.com/albanmartel/Latex_Modele_CV/master/screenshot.png" alt="capture d'écran modèle CV" />
